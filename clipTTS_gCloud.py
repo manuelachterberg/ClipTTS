@@ -1,6 +1,8 @@
 import os
+from gtts import gTTS
 import subprocess
-from TTS.api import TTS
+
+
 
 def text_to_speech_from_clipboard():
     # Get text from clipboard using xclip
@@ -14,18 +16,12 @@ def text_to_speech_from_clipboard():
         print("Clipboard is empty. Please copy some text to convert.")
         return
 
-    # Initialize TTS with a German model and HiFi-GAN vocoder
-    tts = TTS(
-        model_name="tts_models/de/thorsten/tacotron2-DDC",
-        progress_bar=True,
-        gpu=True
-    )
+    # Create TTS object with German language
+    tts = gTTS(text, lang='de')
 
-    # Set output filename
-    filename = "clipboard_tts.wav"
-
-    # Generate the audio from text and save to file
-    tts.tts_to_file(text=text + "[amused]", file_path=filename)
+    # Save the generated audio to a file
+    filename = "clipboard_tts.mp3"
+    tts.save(filename)
 
     # Play the audio file
     os.system(f"mpv {filename}")
