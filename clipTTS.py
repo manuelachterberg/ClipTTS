@@ -25,7 +25,7 @@ def text_to_speech_from_clipboard():
     filename = "clipboard_tts.wav"
 
     # Generate the audio from text and save to file
-    tts.tts_to_file(text=text + "[amused]", file_path=filename)
+    tts.tts_to_file(text=text, file_path=filename)
 
     # Play the audio file
     os.system(f"mpv {filename}")
